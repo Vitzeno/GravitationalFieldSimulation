@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { CreateCanvas } from "./canvas";
+import { RenderScene } from "./renderer";
 
 ReactDOM.render(
   <React.StrictMode>
-    <CreateCanvas name="WebGL" />
+    <RenderScene name="WebGL" />
   </React.StrictMode>,
   document.getElementById("root")
 );
