@@ -11,7 +11,7 @@ export class SolarSystemScene extends Scene {
         color: 0x00ff00,
         wireframe: true,
       }),
-      1000000000000000,
+      1.0e15,
       63.71,
       "Earth",
       new THREE.Vector3(0, 0, -500),
@@ -24,11 +24,11 @@ export class SolarSystemScene extends Scene {
         color: 0x0000ff,
         wireframe: true,
       }),
-      5000,
+      1.0e3,
       17.37,
       "Moon",
-      new THREE.Vector3(600, 0, -500),
-      new THREE.Vector3(0, 0, -0.5)
+      new THREE.Vector3(384.4, 0, -500),
+      new THREE.Vector3(0, 0, -1)
     ),
   ];
 
