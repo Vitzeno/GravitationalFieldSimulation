@@ -1,31 +1,36 @@
 import * as THREE from "three";
 import { Renderable } from "../../primatives/renderable";
+import { Trail } from "../../primatives/trail";
 
 export class Planet extends Renderable {
   name: string;
   mass: number;
   radius: number;
-  initialVelcity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
+  initialVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
   currentVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
 
   gravitationalConstant: number = 6.67408e-11;
 
+  trail: Trail = new Trail();
+
+  frameCount: number = 0;
+  frameUpdate: number = 75;
+
   constructor(
     geometry: THREE.BufferGeometry,
-    material: THREE.MeshBasicMaterial,
+    material: THREE.Material,
     mass: number,
     radius: number,
     name: string,
     position: THREE.Vector3 = new THREE.Vector3(0, 0, -10),
-    initialVelcity: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
+    initialVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
   ) {
     super(geometry, material, position);
     this.mass = mass;
     this.radius = radius;
     this.name = name;
-    this.initialVelcity = initialVelcity;
-
-    this.currentVelocity = this.initialVelcity;
+    this.initialVelocity = initialVelocity;
+    this.currentVelocity = this.initialVelocity;
   }
 
   /**
@@ -34,12 +39,15 @@ export class Planet extends Renderable {
    * @param {number} deltaTime - Time since last frame in seconds.
    */
   update = (deltaTime: number) => {
-    //console.log("update planet");
+    this.frameCount++;
     this.threeObject.rotateY(deltaTime * 0.1);
     this.threeObject.position.add(this.currentVelocity);
-    // console.log(
-    //   `${this.name}: ${this.threeObject.position.x} ${this.threeObject.position.y} ${this.threeObject.position.z}`
-    // );
+
+    // call update every value of frameUpdate
+    if (this.frameCount === this.frameUpdate)
+      this.trail.addPoint(this.threeObject.position);
+
+    this.frameCount %= this.frameUpdate;
   };
 
   updateVelocity = (planets: Planet[], deltaTime: number) => {

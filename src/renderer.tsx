@@ -3,6 +3,8 @@ import * as THREE from "three";
 import { Camera } from "./primatives/camera";
 import { OrbitCamera } from "./primatives/orbit-camera";
 import { SolarSystemScene } from "./scenes/solar-system/solar-system-scene";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 
 interface Props {
   name: string;
@@ -11,6 +13,7 @@ interface Props {
 let camera: Camera;
 let scene: SolarSystemScene;
 let renderer: THREE.WebGLRenderer;
+let composer: EffectComposer;
 
 let clock = new THREE.Clock();
 let deltaTime = 0;
@@ -36,7 +39,8 @@ const renderLoop = () => {
   scene.objects.forEach((object) => object.update(deltaTime));
   camera.update(deltaTime);
 
-  renderer.render(scene.threeScene, camera.threeCamera);
+  composer.render(deltaTime);
+  //renderer.render(scene.threeScene, camera.threeCamera);
 };
 
 const resizeWindow = () => {
@@ -53,12 +57,16 @@ const init = () => {
     90,
     window.innerWidth / window.innerHeight,
     0.1,
-    50000,
+    10000000,
     renderer.domElement
   );
 
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", resizeWindow, false);
+
+  let renderPass = new RenderPass(scene.threeScene, camera.threeCamera);
+  composer = new EffectComposer(renderer);
+  composer.addPass(renderPass);
 
   renderLoop();
 };

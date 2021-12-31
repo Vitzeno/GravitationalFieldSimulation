@@ -21,12 +21,13 @@ export class OrbitCamera extends Camera {
     far: number,
     domElement?: HTMLElement | undefined,
     target: THREE.Vector3 = new THREE.Vector3(0, 0, -500),
-    position: THREE.Vector3 = new THREE.Vector3(0, 500, 0)
+    position: THREE.Vector3 = new THREE.Vector3(0, 5000, 0)
   ) {
     super(fov, aspect, near, far, position);
     this.domElement = domElement;
     this.target = target;
 
+    this.threeCamera.lookAt(target);
     this.controls = new OrbitControls(this.threeCamera, this.domElement);
     // orbit camera requires a target
     this.controls.target.copy(target);

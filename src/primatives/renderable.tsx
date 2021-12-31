@@ -3,11 +3,11 @@ import * as THREE from "three";
 export class Renderable {
   threeObject: THREE.Object3D;
   geometry: THREE.BufferGeometry;
-  material: THREE.MeshBasicMaterial;
+  material: THREE.Material;
 
   constructor(
     geometry: THREE.BufferGeometry,
-    material: THREE.MeshBasicMaterial,
+    material: THREE.Material,
     position: THREE.Vector3 = new THREE.Vector3(0, 0, -10)
   ) {
     this.geometry = geometry;
