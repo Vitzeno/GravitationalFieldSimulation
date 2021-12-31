@@ -37,9 +37,9 @@ export class Planet extends Renderable {
     //console.log("update planet");
     this.threeObject.rotateY(deltaTime * 0.1);
     this.threeObject.position.add(this.currentVelocity);
-    console.log(
-      `${this.name}: ${this.threeObject.position.x} ${this.threeObject.position.y} ${this.threeObject.position.z}`
-    );
+    // console.log(
+    //   `${this.name}: ${this.threeObject.position.x} ${this.threeObject.position.y} ${this.threeObject.position.z}`
+    // );
   };
 
   updateVelocity = (planets: Planet[], deltaTime: number) => {

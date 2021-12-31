@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import * as THREE from "three";
 import { Camera } from "./primatives/camera";
+import { OrbitCamera } from "./primatives/orbit-camera";
 import { SolarSystemScene } from "./scenes/solar-system/solar-system-scene";
 
 interface Props {
@@ -46,9 +47,15 @@ const resizeWindow = () => {
 };
 
 const init = () => {
-  camera = new Camera(90, window.innerWidth / window.innerHeight, 0.1, 50000);
   scene = new SolarSystemScene();
   renderer = setupRenderer();
+  camera = new OrbitCamera(
+    90,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    50000,
+    renderer.domElement
+  );
 
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", resizeWindow, false);
