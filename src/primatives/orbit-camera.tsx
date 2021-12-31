@@ -21,7 +21,7 @@ export class OrbitCamera extends Camera {
     far: number,
     domElement?: HTMLElement | undefined,
     target: THREE.Vector3 = new THREE.Vector3(0, 0, -500),
-    position: THREE.Vector3 = new THREE.Vector3(0, 5000, 0)
+    position: THREE.Vector3 = new THREE.Vector3(-700, 2000, 900)
   ) {
     super(fov, aspect, near, far, position);
     this.domElement = domElement;
@@ -46,5 +46,6 @@ export class OrbitCamera extends Camera {
    */
   update = (deltaTime: number) => {
     this.controls.update();
+    console.log(this.threeCamera.position);
   };
 }
