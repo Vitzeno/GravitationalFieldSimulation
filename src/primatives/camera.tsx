@@ -2,8 +2,8 @@ import * as THREE from "three";
 
 export class Camera {
   threeCamera: THREE.PerspectiveCamera;
-  moveSpeed: number = 2;
-  mouseSensitivity: number = 30;
+  moveSpeed: number = 1000;
+  mouseSensitivity: number = 10;
   // if true forward movement follows camera orientation
   freeCam: boolean = true;
 
@@ -69,7 +69,7 @@ export class Camera {
   };
 
   private handleMouseMove = (event: MouseEvent) => {
-    console.log(this.mouseRotateX, this.mouseRotateY);
+    //console.log(this.mouseRotateX, this.mouseRotateY);
     this.mouseRotateX =
       (event.movementX * Math.PI * -this.mouseSensitivity) / 180;
     this.mouseRotateY =
