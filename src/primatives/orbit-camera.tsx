@@ -10,6 +10,10 @@ export class OrbitCamera extends Camera {
   controls: OrbitControls;
   target: THREE.Vector3;
 
+  zoomSpeed: number = 2;
+  rotateSpeed: number = 2;
+  panSpeed: number = 2;
+
   constructor(
     fov: number,
     aspect: number,
@@ -17,14 +21,20 @@ export class OrbitCamera extends Camera {
     far: number,
     domElement?: HTMLElement | undefined,
     target: THREE.Vector3 = new THREE.Vector3(0, 0, -500),
-    position: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
+    position: THREE.Vector3 = new THREE.Vector3(0, 500, 0)
   ) {
     super(fov, aspect, near, far, position);
     this.domElement = domElement;
     this.target = target;
 
     this.controls = new OrbitControls(this.threeCamera, this.domElement);
+    // orbit camera requires a target
     this.controls.target.copy(target);
+
+    this.controls.zoomSpeed = this.zoomSpeed;
+    this.controls.rotateSpeed = this.rotateSpeed;
+    this.controls.panSpeed = this.panSpeed;
+
     this.controls.update();
   }
 
