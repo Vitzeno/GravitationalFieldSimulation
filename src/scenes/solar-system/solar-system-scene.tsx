@@ -3,6 +3,13 @@ import { Scene } from "../../primatives/scene";
 import { Planet } from "../../scenes/solar-system/planet";
 
 export class SolarSystemScene extends Scene {
+  gridSize = 1.0e5;
+  gridDivisions = 1.0e1;
+
+  gridX = new THREE.GridHelper(this.gridSize, this.gridDivisions);
+  gridY = new THREE.GridHelper(this.gridSize, this.gridDivisions);
+  gridZ = new THREE.GridHelper(this.gridSize, this.gridDivisions);
+
   objects: Planet[] = [
     //Sun
     new Planet(
@@ -45,8 +52,27 @@ export class SolarSystemScene extends Scene {
     ),
   ];
 
-  constructor() {
+  constructor(
+    enableGridX: boolean = true,
+    enableGridY: boolean = true,
+    enableGridZ: boolean = true
+  ) {
     super([]);
+    // setup grid
+    if (enableGridX) {
+      this.gridX.rotateZ(Math.PI / 2);
+      this.threeScene.add(this.gridX);
+    }
+
+    if (enableGridY) {
+      this.gridY.rotateX(Math.PI / 2);
+      this.threeScene.add(this.gridY);
+    }
+
+    if (enableGridZ) {
+      this.threeScene.add(this.gridZ);
+    }
+
     this.objects.forEach((object) => {
       // Add planets to scene
       this.threeScene.add(object.threeObject);
