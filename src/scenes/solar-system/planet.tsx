@@ -2,10 +2,13 @@ import * as THREE from "three";
 import { Renderable, RenderableParams } from "../../primatives/renderable";
 import { Trail } from "../../primatives/trail";
 
-export interface PlanetParams extends RenderableParams {
+export interface PlanetParams
+  extends Omit<RenderableParams, "geometry" | "material"> {
   name: string;
   mass: number;
   radius: number;
+  colour: THREE.Color;
+  position: THREE.Vector3;
   initialVelocity: THREE.Vector3;
 }
 
@@ -13,6 +16,8 @@ export class Planet extends Renderable {
   name: string;
   mass: number;
   radius: number;
+  colour: THREE.Color;
+
   initialVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
   currentVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
 
@@ -24,22 +29,25 @@ export class Planet extends Renderable {
   frameUpdate: number = 75;
 
   constructor({
-    geometry,
-    material,
     position,
     name,
     mass,
     radius,
+    colour,
     initialVelocity,
+    scene,
   }: PlanetParams) {
     super({
-      geometry,
-      material,
-      position,
+      geometry: new THREE.SphereGeometry(radius, 32, 32),
+      material: new THREE.MeshBasicMaterial({ color: colour, wireframe: true }),
+      scene,
     });
+    this.name = name;
     this.mass = mass;
     this.radius = radius;
-    this.name = name;
+    this.colour = colour;
+
+    this.threeObject.position.copy(position);
     this.initialVelocity = initialVelocity;
     this.currentVelocity = this.initialVelocity;
   }
@@ -83,5 +91,13 @@ export class Planet extends Renderable {
         this.currentVelocity.add(acceleration.multiplyScalar(deltaTime));
       }
     });
+  };
+
+  turnOnTrails = () => {
+    this.threeParentScene.add(this.trail.trailObject);
+  };
+
+  turnOffTrails = () => {
+    this.threeParentScene.remove(this.trail.trailObject);
   };
 }

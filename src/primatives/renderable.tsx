@@ -3,18 +3,23 @@ import * as THREE from "three";
 export interface RenderableParams {
   geometry: THREE.BufferGeometry;
   material: THREE.Material;
-  position: THREE.Vector3;
+  scene: THREE.Scene;
 }
 export class Renderable {
   threeObject: THREE.Object3D;
+  threeParentScene: THREE.Scene;
+
   geometry: THREE.BufferGeometry;
   material: THREE.Material;
 
-  constructor({ geometry, material, position }: RenderableParams) {
+  constructor({ geometry, material, scene }: RenderableParams) {
     this.geometry = geometry;
     this.material = material;
+    this.threeParentScene = scene;
     this.threeObject = new THREE.Mesh(this.geometry, this.material);
-    this.threeObject.position.copy(position);
+
+    // every renderable now has a parent scene, it need to add itself to the scene
+    this.threeParentScene.add(this.threeObject);
   }
 
   /**

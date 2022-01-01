@@ -2,6 +2,11 @@ import * as THREE from "three";
 import { Scene } from "../../primatives/scene";
 import { Planet } from "../../scenes/solar-system/planet";
 
+export interface SolarSystemSceneParams {
+  enableGridX: boolean;
+  enableGridY: boolean;
+  enableGridZ: boolean;
+}
 export class SolarSystemScene extends Scene {
   gridSize = 1.0e5;
   gridDivisions = 1.0e1;
@@ -10,54 +15,45 @@ export class SolarSystemScene extends Scene {
   gridY = new THREE.GridHelper(this.gridSize, this.gridDivisions);
   gridZ = new THREE.GridHelper(this.gridSize, this.gridDivisions);
 
-  objects: Planet[] = [
+  planets: Planet[] = [
     //Sun
     new Planet({
-      geometry: new THREE.SphereGeometry(696.34, 32, 32),
-      material: new THREE.MeshBasicMaterial({
-        color: 0x00ff00,
-        wireframe: true,
-      }),
+      name: "Sun",
       mass: 1.0e16,
       radius: 696.34,
-      name: "Sun",
+      colour: new THREE.Color(0x00ff00),
       position: new THREE.Vector3(0, 0, -500),
       initialVelocity: new THREE.Vector3(0, 0, 0),
+      scene: this.threeScene,
     }),
     //Earth
     new Planet({
-      geometry: new THREE.SphereGeometry(63.71, 32, 32),
-      material: new THREE.MeshBasicMaterial({
-        color: 0x0000ff,
-        wireframe: true,
-      }),
+      name: "Earth",
       mass: 1.0e15,
       radius: 63.71,
-      name: "Earth",
+      colour: new THREE.Color(0x0000ff),
       position: new THREE.Vector3(5000, 0, -500),
       initialVelocity: new THREE.Vector3(0, 0, -0.5),
+      scene: this.threeScene,
     }),
     //Moon
     new Planet({
-      geometry: new THREE.SphereGeometry(17.37, 32, 32),
-      material: new THREE.MeshBasicMaterial({
-        color: 0xcccccc,
-        wireframe: true,
-      }),
+      name: "Moon",
       mass: 1.0e3,
       radius: 17.37,
-      name: "Moon",
+      colour: new THREE.Color(0xcccccc),
       position: new THREE.Vector3(5384, 0, -500),
       initialVelocity: new THREE.Vector3(0, 0, -1.5),
+      scene: this.threeScene,
     }),
   ];
 
-  constructor(
-    enableGridX: boolean = true,
-    enableGridY: boolean = true,
-    enableGridZ: boolean = true
-  ) {
-    super([]);
+  constructor({
+    enableGridX,
+    enableGridY,
+    enableGridZ,
+  }: SolarSystemSceneParams) {
+    super();
     // setup grid
     if (enableGridX) {
       this.gridX.rotateZ(Math.PI / 2);
@@ -73,11 +69,9 @@ export class SolarSystemScene extends Scene {
       this.threeScene.add(this.gridZ);
     }
 
-    this.objects.forEach((object) => {
-      // Add planets to scene
-      this.threeScene.add(object.threeObject);
-      // Add planet trails to scene
-      this.threeScene.add(object.trail.trailObject);
+    // turn on trails for visualisation of movement
+    this.planets.forEach((planet) => {
+      planet.turnOnTrails();
     });
   }
 
@@ -87,8 +81,8 @@ export class SolarSystemScene extends Scene {
    * @param {number} deltaTime - Time since last frame in seconds.
    */
   update = (deltaTime: number) => {
-    this.objects.forEach((object) => {
-      object.updateVelocity(this.objects, deltaTime);
+    this.planets.forEach((object) => {
+      object.updateVelocity(this.planets, deltaTime);
     });
   };
 }

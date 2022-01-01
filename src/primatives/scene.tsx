@@ -1,17 +1,10 @@
 import * as THREE from "three";
-import { Renderable } from "./renderable";
 
 export class Scene {
   threeScene: THREE.Scene;
-  objects: Renderable[];
 
-  constructor(objects: Renderable[]) {
+  constructor() {
     this.threeScene = new THREE.Scene();
-    this.objects = objects;
-
-    objects.forEach((object) => {
-      this.threeScene.add(object.threeObject);
-    });
   }
 
   /**

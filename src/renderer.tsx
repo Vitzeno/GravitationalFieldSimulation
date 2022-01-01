@@ -36,7 +36,7 @@ const renderLoop = () => {
   document.title = `FPS: ${1 / deltaTime}`;
 
   scene.update(deltaTime);
-  scene.objects.forEach((object) => object.update(deltaTime));
+  scene.planets.forEach((object) => object.update(deltaTime));
   camera.update(deltaTime);
 
   composer.render(deltaTime);
@@ -51,7 +51,11 @@ const resizeWindow = () => {
 };
 
 const init = () => {
-  scene = new SolarSystemScene();
+  scene = new SolarSystemScene({
+    enableGridX: true,
+    enableGridY: true,
+    enableGridZ: true,
+  });
   renderer = setupRenderer();
   camera = new OrbitCamera({
     fov: 90,
