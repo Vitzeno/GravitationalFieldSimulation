@@ -17,3 +17,4 @@ Any two bodies attract each other in direct proportion to their masses and inver
 - M<sub>2</sub> is the mass of the other object
 - r<sup>2</sup> is the radial distance between the centers of M<sub>1</sub> and M<sub>2</sub>
 
+Implementation details can be found [here](https://github.com/Vitzeno/WebGL/blob/master/src/scenes/solar-system/planet.tsx#L53).
