@@ -1,5 +1,9 @@
 import * as THREE from "three";
-import { Camera } from "./camera";
+import { Camera, CameraParams } from "./camera";
+
+export interface FPSCameraParams extends CameraParams {
+  freeCam: boolean;
+}
 
 /**
  * Classic FPS camera with free look capabilities.
@@ -18,15 +22,8 @@ export class FPSCamera extends Camera {
   mouseRotateX: number = 0;
   mouseRotateY: number = 0;
 
-  constructor(
-    fov: number,
-    aspect: number,
-    near: number,
-    far: number,
-    freeCam: boolean = true,
-    position: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
-  ) {
-    super(fov, aspect, near, far, position);
+  constructor({ fov, aspect, near, far, position, freeCam }: FPSCameraParams) {
+    super({ fov, aspect, near, far, position });
     this.freeCam = freeCam;
 
     window.addEventListener("keydown", this.handleKeyDown, false);

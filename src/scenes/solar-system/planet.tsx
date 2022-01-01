@@ -1,6 +1,13 @@
 import * as THREE from "three";
-import { Renderable } from "../../primatives/renderable";
+import { Renderable, RenderableParams } from "../../primatives/renderable";
 import { Trail } from "../../primatives/trail";
+
+export interface PlanetParams extends RenderableParams {
+  name: string;
+  mass: number;
+  radius: number;
+  initialVelocity: THREE.Vector3;
+}
 
 export class Planet extends Renderable {
   name: string;
@@ -16,16 +23,20 @@ export class Planet extends Renderable {
   frameCount: number = 0;
   frameUpdate: number = 75;
 
-  constructor(
-    geometry: THREE.BufferGeometry,
-    material: THREE.Material,
-    mass: number,
-    radius: number,
-    name: string,
-    position: THREE.Vector3 = new THREE.Vector3(0, 0, -10),
-    initialVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
-  ) {
-    super(geometry, material, position);
+  constructor({
+    geometry,
+    material,
+    position,
+    name,
+    mass,
+    radius,
+    initialVelocity,
+  }: PlanetParams) {
+    super({
+      geometry,
+      material,
+      position,
+    });
     this.mass = mass;
     this.radius = radius;
     this.name = name;

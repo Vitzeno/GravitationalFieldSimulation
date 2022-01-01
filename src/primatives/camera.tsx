@@ -1,15 +1,17 @@
 import * as THREE from "three";
 
+export interface CameraParams {
+  fov: number;
+  aspect: number;
+  near: number;
+  far: number;
+  position: THREE.Vector3;
+}
+
 export class Camera {
   threeCamera: THREE.PerspectiveCamera;
 
-  constructor(
-    fov: number,
-    aspect: number,
-    near: number,
-    far: number,
-    position: THREE.Vector3 = new THREE.Vector3(0, 0, 0)
-  ) {
+  constructor({ fov, aspect, near, far, position }: CameraParams) {
     this.threeCamera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this.threeCamera.position.copy(position);
   }

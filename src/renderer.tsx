@@ -53,13 +53,15 @@ const resizeWindow = () => {
 const init = () => {
   scene = new SolarSystemScene();
   renderer = setupRenderer();
-  camera = new OrbitCamera(
-    90,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    10000000,
-    renderer.domElement
-  );
+  camera = new OrbitCamera({
+    fov: 90,
+    aspect: window.innerWidth / window.innerHeight,
+    near: 0.1,
+    far: 10000000,
+    position: new THREE.Vector3(-700, 2000, 900),
+    target: new THREE.Vector3(0, 0, -500),
+    domElement: renderer.domElement,
+  });
 
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", resizeWindow, false);

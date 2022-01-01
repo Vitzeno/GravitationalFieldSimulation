@@ -12,44 +12,44 @@ export class SolarSystemScene extends Scene {
 
   objects: Planet[] = [
     //Sun
-    new Planet(
-      new THREE.SphereGeometry(696.34, 32, 32),
-      new THREE.MeshBasicMaterial({
+    new Planet({
+      geometry: new THREE.SphereGeometry(696.34, 32, 32),
+      material: new THREE.MeshBasicMaterial({
         color: 0x00ff00,
         wireframe: true,
       }),
-      1.0e16,
-      696.34,
-      "Sun",
-      new THREE.Vector3(0, 0, -500),
-      new THREE.Vector3(0, 0, 0)
-    ),
+      mass: 1.0e16,
+      radius: 696.34,
+      name: "Sun",
+      position: new THREE.Vector3(0, 0, -500),
+      initialVelocity: new THREE.Vector3(0, 0, 0),
+    }),
     //Earth
-    new Planet(
-      new THREE.SphereGeometry(63.71, 32, 32),
-      new THREE.MeshBasicMaterial({
+    new Planet({
+      geometry: new THREE.SphereGeometry(63.71, 32, 32),
+      material: new THREE.MeshBasicMaterial({
         color: 0x0000ff,
         wireframe: true,
       }),
-      1.0e15,
-      63.71,
-      "Earth",
-      new THREE.Vector3(5000, 0, -500),
-      new THREE.Vector3(0, 0, -0.5)
-    ),
+      mass: 1.0e15,
+      radius: 63.71,
+      name: "Earth",
+      position: new THREE.Vector3(5000, 0, -500),
+      initialVelocity: new THREE.Vector3(0, 0, -0.5),
+    }),
     //Moon
-    new Planet(
-      new THREE.SphereGeometry(17.37, 32, 32),
-      new THREE.MeshBasicMaterial({
+    new Planet({
+      geometry: new THREE.SphereGeometry(17.37, 32, 32),
+      material: new THREE.MeshBasicMaterial({
         color: 0xcccccc,
         wireframe: true,
       }),
-      1.0e3,
-      17.37,
-      "Moon",
-      new THREE.Vector3(5384, 0, -500),
-      new THREE.Vector3(0, 0, -1.5)
-    ),
+      mass: 1.0e3,
+      radius: 17.37,
+      name: "Moon",
+      position: new THREE.Vector3(5384, 0, -500),
+      initialVelocity: new THREE.Vector3(0, 0, -1.5),
+    }),
   ];
 
   constructor(

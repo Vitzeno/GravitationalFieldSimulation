@@ -1,6 +1,11 @@
 import * as THREE from "three";
-import { Camera } from "./camera";
+import { Camera, CameraParams } from "./camera";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+export interface OrbitCameraParams extends CameraParams {
+  domElement?: HTMLElement | undefined;
+  target: THREE.Vector3;
+}
 
 /**
  * Orbit camera allows for rotating around a given target.
@@ -14,16 +19,16 @@ export class OrbitCamera extends Camera {
   rotateSpeed: number = 2;
   panSpeed: number = 2;
 
-  constructor(
-    fov: number,
-    aspect: number,
-    near: number,
-    far: number,
-    domElement?: HTMLElement | undefined,
-    target: THREE.Vector3 = new THREE.Vector3(0, 0, -500),
-    position: THREE.Vector3 = new THREE.Vector3(-700, 2000, 900)
-  ) {
-    super(fov, aspect, near, far, position);
+  constructor({
+    fov,
+    aspect,
+    near,
+    far,
+    position,
+    target,
+    domElement,
+  }: OrbitCameraParams) {
+    super({ fov, aspect, near, far, position });
     this.domElement = domElement;
     this.target = target;
 
