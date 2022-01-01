@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/GravitationalFieldSimulation/static/js/main.0b277b29.chunk.js",
+    "main.js.map": "/GravitationalFieldSimulation/static/js/main.0b277b29.chunk.js.map",
+    "runtime-main.js": "/GravitationalFieldSimulation/static/js/runtime-main.44a93bd8.js",
+    "runtime-main.js.map": "/GravitationalFieldSimulation/static/js/runtime-main.44a93bd8.js.map",
+    "static/js/2.bfcd0a41.chunk.js": "/GravitationalFieldSimulation/static/js/2.bfcd0a41.chunk.js",
+    "static/js/2.bfcd0a41.chunk.js.map": "/GravitationalFieldSimulation/static/js/2.bfcd0a41.chunk.js.map",
+    "index.html": "/GravitationalFieldSimulation/index.html",
+    "static/js/2.bfcd0a41.chunk.js.LICENSE.txt": "/GravitationalFieldSimulation/static/js/2.bfcd0a41.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44a93bd8.js",
+    "static/js/2.bfcd0a41.chunk.js",
+    "static/js/main.0b277b29.chunk.js"
+  ]
+}
