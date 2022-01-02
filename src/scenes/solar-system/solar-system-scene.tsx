@@ -97,8 +97,9 @@ export class SolarSystemScene extends Scene {
    * @param {number} deltaTime - Time since last frame in seconds.
    */
   update = (deltaTime: number) => {
-    this.planets.forEach((object) => {
-      object.updateVelocity(this.planets, deltaTime);
+    this.planets.forEach((planet) => {
+      planet.updateVelocity(this.planets, deltaTime);
+      planet.update(deltaTime);
     });
   };
 }

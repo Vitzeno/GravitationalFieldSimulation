@@ -5,7 +5,7 @@ import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
 export interface MouseHandlerParams {
   camera: THREE.Camera;
   scene: THREE.Scene;
-  intractables: Renderable[];
+  interactables: Renderable[];
 }
 
 export class ObjectPicker {
@@ -14,12 +14,12 @@ export class ObjectPicker {
 
   camera: THREE.Camera;
   scene: THREE.Scene;
-  intractables: Renderable[];
+  interactables: Renderable[];
 
-  constructor({ camera, scene, intractables }: MouseHandlerParams) {
+  constructor({ camera, scene, interactables }: MouseHandlerParams) {
     this.camera = camera;
     this.scene = scene;
-    this.intractables = intractables;
+    this.interactables = interactables;
     window.addEventListener("mousemove", this.onMouseMove, false);
   }
 
@@ -36,13 +36,14 @@ export class ObjectPicker {
     // calculate objects intersecting the picking ray
     const intersects = this.raycaster.intersectObjects(this.scene.children);
     for (let i = 0; i < intersects.length; i++) {
-      intersectedObject = this.intractables.find(
+      intersectedObject = this.interactables.find(
         (intractable) => intractable.threeObject.id === intersects[i].object.id
       );
 
       return intersectedObject;
     }
   };
+
   /**
    * Updates object parameters, typically called every frame.
    * Delta time used to compensate for inconsistent frame rates.

@@ -16,6 +16,8 @@ export class Camera {
     this.threeCamera.position.copy(position);
   }
 
+  targetObject = (target?: THREE.Vector3) => {};
+
   /**
    * Updates object parameters, typically called every frame.
    * Delta time used to compensate for inconsistent frame rates.

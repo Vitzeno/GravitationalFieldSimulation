@@ -4,7 +4,7 @@ import { RenderScene } from "./renderer";
 
 ReactDOM.render(
   <React.StrictMode>
-    <RenderScene name="WebGL" />
+    <RenderScene />
   </React.StrictMode>,
   document.getElementById("root")
 );

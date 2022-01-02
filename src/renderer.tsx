@@ -8,10 +8,6 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ObjectPicker } from "./primatives/object-picker";
 import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
 
-interface Props {
-  name: string;
-}
-
 let camera: Camera;
 let scene: SolarSystemScene;
 let renderer: THREE.WebGLRenderer;
@@ -40,15 +36,15 @@ const renderLoop = () => {
   requestAnimationFrame(renderLoop);
   deltaTime = clock.getDelta();
   //Probably a better way to do this
-  document.title = `FPS: ${1 / deltaTime}`;
+  document.title = `FPS: ${Math.round(1 / deltaTime)}`;
+
+  camera.targetObject(picker.findIntersectedObject()?.threeObject.position);
 
   picker.update(outlinePass, deltaTime);
   scene.update(deltaTime);
-  scene.planets.forEach((planet) => planet.update(deltaTime));
   camera.update(deltaTime);
 
   composer.render(deltaTime);
-  //renderer.render(scene.threeScene, camera.threeCamera);
 };
 
 const resizeWindow = () => {
@@ -77,7 +73,7 @@ const init = () => {
   picker = new ObjectPicker({
     camera: camera.threeCamera,
     scene: scene.threeScene,
-    intractables: scene.planets,
+    interactables: scene.planets,
   });
 
   document.body.appendChild(renderer.domElement);
@@ -98,7 +94,7 @@ const init = () => {
   renderLoop();
 };
 
-export const RenderScene: FC<Props> = ({ name }) => {
+export const RenderScene: FC = () => {
   useEffect(() => {
     init();
   });

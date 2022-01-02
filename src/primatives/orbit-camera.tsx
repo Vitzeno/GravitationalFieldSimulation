@@ -51,6 +51,10 @@ export class OrbitCamera extends Camera {
    */
   update = (deltaTime: number) => {
     this.controls.update();
-    //console.log(this.threeCamera.position);
+    this.controls.target.copy(this.target);
+  };
+
+  targetObject = (target?: THREE.Vector3) => {
+    this.target.copy(target || this.target);
   };
 }
