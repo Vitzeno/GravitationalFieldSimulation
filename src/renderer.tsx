@@ -52,8 +52,8 @@ const resizeWindow = () => {
 
 const init = () => {
   scene = new SolarSystemScene({
-    enableGridX: true,
-    enableGridY: true,
+    enableGridX: false,
+    enableGridY: false,
     enableGridZ: true,
   });
   renderer = setupRenderer();

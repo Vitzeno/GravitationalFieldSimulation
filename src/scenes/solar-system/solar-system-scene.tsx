@@ -9,11 +9,27 @@ export interface SolarSystemSceneParams {
 }
 export class SolarSystemScene extends Scene {
   gridSize = 1.0e5;
-  gridDivisions = 1.0e1;
+  gridDivisions = 3.0e2;
+  gridColour = new THREE.Color(0x666666);
 
-  gridX = new THREE.GridHelper(this.gridSize, this.gridDivisions);
-  gridY = new THREE.GridHelper(this.gridSize, this.gridDivisions);
-  gridZ = new THREE.GridHelper(this.gridSize, this.gridDivisions);
+  gridX = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
+  gridY = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
+  gridZ = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
 
   planets: Planet[] = [
     //Sun
@@ -21,7 +37,7 @@ export class SolarSystemScene extends Scene {
       name: "Sun",
       mass: 1.0e16,
       radius: 696.34,
-      colour: new THREE.Color(0x00ff00),
+      colour: new THREE.Color(0xfff00),
       position: new THREE.Vector3(0, 0, -500),
       initialVelocity: new THREE.Vector3(0, 0, 0),
       scene: this.threeScene,
@@ -43,7 +59,7 @@ export class SolarSystemScene extends Scene {
       radius: 17.37,
       colour: new THREE.Color(0xcccccc),
       position: new THREE.Vector3(5384, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, -1.5),
+      initialVelocity: new THREE.Vector3(0, -0.5, -1),
       scene: this.threeScene,
     }),
   ];
@@ -84,5 +100,28 @@ export class SolarSystemScene extends Scene {
     this.planets.forEach((object) => {
       object.updateVelocity(this.planets, deltaTime);
     });
+
+    let count = this.gridZ.geometry.getAttribute("position").count;
+    //console.log(count);
+    for (let i = 0; i < count; i++) {
+      let x = this.gridZ.geometry.getAttribute("position").getX(i);
+      let z = this.gridZ.geometry.getAttribute("position").getZ(i);
+      let y = this.gridZ.geometry.getAttribute("position").getY(i);
+      //console.log(x, z);
+      if (
+        Math.abs(x - this.planets[1].threeObject.position.x) < 100 ||
+        Math.abs(z - this.planets[1].threeObject.position.z) < 100
+      ) {
+        this.gridZ.geometry
+          .getAttribute("position")
+          .setY(i, this.clamp(-10 * this.planets[1].mass, -1000, 0));
+        //this.gridZ.geometry.getAttribute("position").setX(i, -1000);
+      }
+    }
+    this.gridZ.geometry.computeVertexNormals();
+    this.gridZ.geometry.getAttribute("position").needsUpdate = true;
   };
+
+  clamp = (num: number, min: number, max: number) =>
+    Math.min(Math.max(num, min), max);
 }

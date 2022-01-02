@@ -19,7 +19,7 @@ export class Trail {
     this.positions.fill(new THREE.Vector3(0, 0, 0));
 
     this.material = new THREE.MeshBasicMaterial({
-      color: 0xcccccc,
+      color: 0xffffff,
       //wireframe: true,
     });
     this.geometry = new THREE.SphereGeometry(7, 5, 5);
