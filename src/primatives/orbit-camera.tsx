@@ -51,6 +51,6 @@ export class OrbitCamera extends Camera {
    */
   update = (deltaTime: number) => {
     this.controls.update();
-    console.log(this.threeCamera.position);
+    //console.log(this.threeCamera.position);
   };
 }

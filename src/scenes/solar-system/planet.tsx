@@ -23,7 +23,7 @@ export class Planet extends Renderable {
 
   gravitationalConstant: number = 6.67408e-11;
 
-  trail: Trail = new Trail();
+  trail: Trail;
 
   frameCount: number = 0;
   frameUpdate: number = 75;
@@ -50,6 +50,8 @@ export class Planet extends Renderable {
     this.threeObject.position.copy(position);
     this.initialVelocity = initialVelocity;
     this.currentVelocity = this.initialVelocity;
+
+    this.trail = new Trail({ trailLength: 100, colour: this.colour });
   }
 
   /**

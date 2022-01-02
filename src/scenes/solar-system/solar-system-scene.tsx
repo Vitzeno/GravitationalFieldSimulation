@@ -9,19 +9,35 @@ export interface SolarSystemSceneParams {
 }
 export class SolarSystemScene extends Scene {
   gridSize = 1.0e5;
-  gridDivisions = 1.0e1;
+  gridDivisions = 3.0e2;
+  gridColour = new THREE.Color(0x666666);
 
-  gridX = new THREE.GridHelper(this.gridSize, this.gridDivisions);
-  gridY = new THREE.GridHelper(this.gridSize, this.gridDivisions);
-  gridZ = new THREE.GridHelper(this.gridSize, this.gridDivisions);
+  gridX = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
+  gridY = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
+  gridZ = new THREE.GridHelper(
+    this.gridSize,
+    this.gridDivisions,
+    this.gridColour,
+    this.gridColour
+  );
 
   planets: Planet[] = [
     //Sun
     new Planet({
       name: "Sun",
-      mass: 1.0e16,
-      radius: 696.34,
-      colour: new THREE.Color(0x00ff00),
+      mass: 1.25e16,
+      radius: 796.34,
+      colour: new THREE.Color(0xfff00),
       position: new THREE.Vector3(0, 0, -500),
       initialVelocity: new THREE.Vector3(0, 0, 0),
       scene: this.threeScene,
@@ -33,7 +49,7 @@ export class SolarSystemScene extends Scene {
       radius: 63.71,
       colour: new THREE.Color(0x0000ff),
       position: new THREE.Vector3(5000, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, -0.5),
+      initialVelocity: new THREE.Vector3(0, 0, -0.75),
       scene: this.threeScene,
     }),
     //Moon
@@ -43,7 +59,7 @@ export class SolarSystemScene extends Scene {
       radius: 17.37,
       colour: new THREE.Color(0xcccccc),
       position: new THREE.Vector3(5384, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, -1.5),
+      initialVelocity: new THREE.Vector3(0, -1, -0.75),
       scene: this.threeScene,
     }),
   ];

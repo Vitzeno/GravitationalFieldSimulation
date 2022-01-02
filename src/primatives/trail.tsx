@@ -1,5 +1,10 @@
 import * as THREE from "three";
 
+export interface TrailParams {
+  trailLength: number;
+  colour: THREE.Color;
+}
+
 /**
  * Renders a trails, points are added dynamically to the trail.
  */
@@ -12,14 +17,14 @@ export class Trail {
   counter: number;
   trailLength: number;
 
-  constructor(trailLength: number = 250) {
+  constructor({ trailLength, colour }: TrailParams) {
     this.trailLength = trailLength;
     this.counter = 0;
     this.positions = new Array<THREE.Vector3>(this.trailLength);
     this.positions.fill(new THREE.Vector3(0, 0, 0));
 
     this.material = new THREE.MeshBasicMaterial({
-      color: 0xcccccc,
+      color: colour,
       //wireframe: true,
     });
     this.geometry = new THREE.SphereGeometry(7, 5, 5);
