@@ -2,7 +2,7 @@
 
 This project uses WebGL to render a simulation of various celestial bodies. Interactions between bodies is dictated by Newton's Law of Gravitation and takes into account mass, radius and velocity. However collisions between objects are currently ignored.
 
-![basic orbit](https://user-images.githubusercontent.com/23175651/147840171-c5145ff7-ad7b-4310-a46b-a18686cc6c2b.png)
+![orbits](https://user-images.githubusercontent.com/23175651/147887909-60e1d1b3-1c5e-407e-8c3d-2e5ece8d4bb9.png)
 
 ## Law of Gravity
 
