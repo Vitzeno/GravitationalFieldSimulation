@@ -83,15 +83,15 @@ export class SolarSystemScene extends Scene {
       scene: this.threeScene,
     }),
     //Jupiter
-    new Planet({
-      name: "Jupiter",
-      mass: 2.0e15,
-      radius: 342.81,
-      colour: new THREE.Color(0xc27ba0),
-      position: new THREE.Vector3(7000, 7000, -500),
-      initialVelocity: new THREE.Vector3(0, -0.5, 0.5),
-      scene: this.threeScene,
-    }),
+    // new Planet({
+    //   name: "Jupiter",
+    //   mass: 2.0e15,
+    //   radius: 342.81,
+    //   colour: new THREE.Color(0xc27ba0),
+    //   position: new THREE.Vector3(7000, 7000, -500),
+    //   initialVelocity: new THREE.Vector3(0, -0.5, 0.5),
+    //   scene: this.threeScene,
+    // }),
   ];
 
   constructor({
