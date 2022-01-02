@@ -4,7 +4,6 @@ import { Trail } from "../../primatives/trail";
 
 export interface PlanetParams
   extends Omit<RenderableParams, "geometry" | "material"> {
-  name: string;
   mass: number;
   radius: number;
   colour: THREE.Color;
@@ -13,7 +12,6 @@ export interface PlanetParams
 }
 
 export class Planet extends Renderable {
-  name: string;
   mass: number;
   radius: number;
   colour: THREE.Color;
@@ -41,8 +39,8 @@ export class Planet extends Renderable {
       geometry: new THREE.SphereGeometry(radius, 32, 32),
       material: new THREE.MeshBasicMaterial({ color: colour, wireframe: true }),
       scene,
+      name,
     });
-    this.name = name;
     this.mass = mass;
     this.radius = radius;
     this.colour = colour;

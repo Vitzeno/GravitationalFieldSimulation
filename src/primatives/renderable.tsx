@@ -3,6 +3,7 @@ import * as THREE from "three";
 export interface RenderableParams {
   geometry: THREE.BufferGeometry;
   material: THREE.Material;
+  name: string;
   scene: THREE.Scene;
 }
 export class Renderable {
@@ -11,10 +12,12 @@ export class Renderable {
 
   geometry: THREE.BufferGeometry;
   material: THREE.Material;
+  name: string;
 
-  constructor({ geometry, material, scene }: RenderableParams) {
+  constructor({ geometry, material, scene, name }: RenderableParams) {
     this.geometry = geometry;
     this.material = material;
+    this.name = name;
     this.threeParentScene = scene;
     this.threeObject = new THREE.Mesh(this.geometry, this.material);
 

@@ -5,6 +5,8 @@ import { OrbitCamera } from "./primatives/orbit-camera";
 import { SolarSystemScene } from "./scenes/solar-system/solar-system-scene";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
+import { ObjectPicker } from "./primatives/object-picker";
+import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
 
 interface Props {
   name: string;
@@ -13,7 +15,12 @@ interface Props {
 let camera: Camera;
 let scene: SolarSystemScene;
 let renderer: THREE.WebGLRenderer;
+
+let renderPass: RenderPass;
+let outlinePass: OutlinePass;
 let composer: EffectComposer;
+
+let picker: ObjectPicker;
 
 let clock = new THREE.Clock();
 let deltaTime = 0;
@@ -35,8 +42,9 @@ const renderLoop = () => {
   //Probably a better way to do this
   document.title = `FPS: ${1 / deltaTime}`;
 
+  picker.update(outlinePass, deltaTime);
   scene.update(deltaTime);
-  scene.planets.forEach((object) => object.update(deltaTime));
+  scene.planets.forEach((planet) => planet.update(deltaTime));
   camera.update(deltaTime);
 
   composer.render(deltaTime);
@@ -66,13 +74,26 @@ const init = () => {
     target: new THREE.Vector3(0, 0, -500),
     domElement: renderer.domElement,
   });
+  picker = new ObjectPicker({
+    camera: camera.threeCamera,
+    scene: scene.threeScene,
+    intractables: scene.planets,
+  });
 
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", resizeWindow, false);
 
-  let renderPass = new RenderPass(scene.threeScene, camera.threeCamera);
+  renderPass = new RenderPass(scene.threeScene, camera.threeCamera);
+  outlinePass = new OutlinePass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    scene.threeScene,
+    camera.threeCamera
+  );
+  outlinePass.edgeStrength = 250;
+
   composer = new EffectComposer(renderer);
   composer.addPass(renderPass);
+  composer.addPass(outlinePass);
 
   renderLoop();
 };
