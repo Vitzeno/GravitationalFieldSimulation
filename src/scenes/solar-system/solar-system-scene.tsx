@@ -62,6 +62,36 @@ export class SolarSystemScene extends Scene {
       initialVelocity: new THREE.Vector3(0, -1, -0.75),
       scene: this.threeScene,
     }),
+    //Mars
+    new Planet({
+      name: "Mars",
+      mass: 1.0e15,
+      radius: 63.71,
+      colour: new THREE.Color(0xcc0000),
+      position: new THREE.Vector3(-5000, 0, -500),
+      initialVelocity: new THREE.Vector3(0, 0, 0.75),
+      scene: this.threeScene,
+    }),
+    //Deimos
+    new Planet({
+      name: "Deimos",
+      mass: 1.0e3,
+      radius: 17.37,
+      colour: new THREE.Color(0xcccccc),
+      position: new THREE.Vector3(-5384, 0, -500),
+      initialVelocity: new THREE.Vector3(0, 1, 0.75),
+      scene: this.threeScene,
+    }),
+    //Jupiter
+    new Planet({
+      name: "Jupiter",
+      mass: 2.0e15,
+      radius: 342.81,
+      colour: new THREE.Color(0xc27ba0),
+      position: new THREE.Vector3(7000, 7000, -500),
+      initialVelocity: new THREE.Vector3(0, -0.5, 0.5),
+      scene: this.threeScene,
+    }),
   ];
 
   constructor({

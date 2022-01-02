@@ -66,7 +66,7 @@ const init = () => {
     aspect: window.innerWidth / window.innerHeight,
     near: 0.1,
     far: 10000000,
-    position: new THREE.Vector3(-700, 2000, 900),
+    position: new THREE.Vector3(-700, 5000, 4000),
     target: new THREE.Vector3(0, 0, -500),
     domElement: renderer.domElement,
   });
