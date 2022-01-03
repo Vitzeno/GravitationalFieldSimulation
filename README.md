@@ -1,10 +1,11 @@
 # Gravitational Field Simulation
 
+You can try it yourself [here](https://vitzeno.github.io/GravitationalFieldSimulation/).
+
 This project uses WebGL to render a simulation of various celestial bodies. Interactions between bodies is dictated by Newton's Law of Gravitation and takes into account mass, radius and velocity. However collisions between objects are currently ignored.
 
 ![orbits](https://user-images.githubusercontent.com/23175651/147887909-60e1d1b3-1c5e-407e-8c3d-2e5ece8d4bb9.png)
 
-You can try it yourself [here](https://vitzeno.github.io/GravitationalFieldSimulation/).
 
 ## Law of Gravity
 
