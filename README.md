@@ -24,11 +24,15 @@ Implementation details can be found [here](https://github.com/Vitzeno/WebGL/blob
 
 Once the simulation is up and running the difficult part is figuring out the initial position and velocities of celestial bodies in order to achieve a "stable" orbit.
 
-Since we know that F<sub>C</sub> F<sub>G</sub> are equal but opposite forces we can derive a formula to calculate the orbital velocity needed to sustain an orbit around a given object. This does make the assumption that the orbiting object M<sub>2</sub> will have negligible mass in comparison to M<sub>1</sub>. Below is an illustration of how this is derived and more details can be found [here](https://www.youtube.com/watch?v=nxD7koHdQhM) and [here](https://physics.stackexchange.com/questions/306198/minimum-velocity-to-maintain-orbit-around-a-perfect-sphere).
+Since we know that F<sub>C</sub> and F<sub>G</sub> are equal but opposite forces we can derive a formula to calculate the orbital velocity needed to sustain an orbit around a given object. This does make the assumption that the orbiting object M<sub>2</sub> will have negligible mass in comparison to M<sub>1</sub>. Below is an illustration of how this is derived and more details can be found [here](https://www.youtube.com/watch?v=nxD7koHdQhM) and [here](https://physics.stackexchange.com/questions/306198/minimum-velocity-to-maintain-orbit-around-a-perfect-sphere).
+
+![orbital velocity](https://user-images.githubusercontent.com/23175651/147961307-29f0b6a1-2d48-4d51-bea3-4efe2de1b779.png)
+
+A helper method found [here](https://github.com/Vitzeno/GravitationalFieldSimulation/blob/master/src/config.tsx#L122) can be used to aid in the calculation of these velocities.
 
 ## Custom Scenes
 
-Customs scenarios can be loaded into the simulator by defining a list of celestial bodies in a JSON file. The key attributes for the simulation are the object mass, radius, position and initial velocity. Below is an example of how this data should be defined.
+Custom scenarios can be loaded into the simulator by defining a list of celestial bodies in a JSON file. The key attributes for the simulation are the object mass, radius, position and initial velocity. Below is an example of how this data should be defined.
 
 ```
 [
@@ -63,7 +67,7 @@ Customs scenarios can be loaded into the simulator by defining a list of celesti
 
 ### Instancing
 
-To reduce the number of draw calls objects which share the same geometry but with different scale, position or rotation are batched together and sent to the GPU in a single instance. This is very useful for objects like the trails which need to render a large number of the same geometry but in different positions.
+To reduce the number of draw calls required, objects which share the same geometry but with different scale, position or rotation are batched together and sent to the GPU in a single instance. This is very useful for objects like the trails which need to render a large number of the same geometry but in different positions.
 
 ### LOD Management
 
