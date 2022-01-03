@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import * as THREE from "three";
 import { Camera } from "./primatives/camera";
 import { OrbitCamera } from "./primatives/orbit-camera";
@@ -7,6 +7,9 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ObjectPicker } from "./primatives/object-picker";
 import { OutlinePass } from "three/examples/jsm/postprocessing/OutlinePass";
+import { Upload } from "./upload";
+import { Button, ButtonGroup } from "@chakra-ui/react";
+import { defaultPlanetConfig } from "./config";
 
 let camera: Camera;
 let scene: SolarSystemScene;
@@ -54,11 +57,12 @@ const resizeWindow = () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
-const init = () => {
+const init = (useCustomConfig: boolean) => {
   scene = new SolarSystemScene({
     enableGridX: false,
     enableGridY: false,
     enableGridZ: true,
+    useCustomConfig,
   });
   renderer = setupRenderer();
   camera = new OrbitCamera({
@@ -95,9 +99,18 @@ const init = () => {
 };
 
 export const RenderScene: FC = () => {
-  useEffect(() => {
-    init();
-  });
-
-  return <></>;
+  return (
+    <>
+      <Upload />
+      <ButtonGroup>
+        <Button onClick={(e) => init(true)}>START CUSTOM SCENE</Button>
+        <Button onClick={(e) => init(false)}>START DEFAULT SCENE</Button>
+        <Button
+          onClick={(e) => console.log(JSON.stringify(defaultPlanetConfig))}
+        >
+          LOG DEFAULT SCENE
+        </Button>
+      </ButtonGroup>
+    </>
+  );
 };

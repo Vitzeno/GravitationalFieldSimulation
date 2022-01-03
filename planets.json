@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Sun",
+    "mass": 12500000000000000,
+    "radius": 796.34,
+    "colour": 1048320,
+    "position": { "x": 0, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": 0, "z": 0 }
+  },
+  {
+    "name": "Earth",
+    "mass": 1000000000000000,
+    "radius": 63.71,
+    "colour": 255,
+    "position": { "x": 5000, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": 0, "z": -0.75 }
+  },
+  {
+    "name": "Moon",
+    "mass": 1000,
+    "radius": 17.37,
+    "colour": 13421772,
+    "position": { "x": 5384, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": -1, "z": -0.75 }
+  },
+  {
+    "name": "Mars",
+    "mass": 1000000000000000,
+    "radius": 63.71,
+    "colour": 13369344,
+    "position": { "x": -5000, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": 0, "z": 0.75 }
+  },
+  {
+    "name": "Deimos",
+    "mass": 1000,
+    "radius": 17.37,
+    "colour": 13421772,
+    "position": { "x": -5384, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": 1, "z": 0.75 }
+  },
+  {
+    "name": "Phobos",
+    "mass": 1.0e3,
+    "radius": 17.37,
+    "colour": 13421772,
+    "position": { "x": -4616, "y": 0, "z": -500 },
+    "initialVelocity": { "x": 0, "y": 1, "z": 0.75 }
+  }
+]

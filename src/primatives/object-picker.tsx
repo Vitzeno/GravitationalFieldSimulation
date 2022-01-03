@@ -24,8 +24,8 @@ export class ObjectPicker {
   }
 
   onMouseMove = (event: MouseEvent) => {
-    this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    this.mouse.x = (event.offsetX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(event.offsetY / window.innerHeight) * 2 + 1;
   };
 
   findIntersectedObject = (): Renderable | undefined => {

@@ -1,11 +1,17 @@
 import * as THREE from "three";
+import {
+  customPlanetConfig,
+  defaultPlanetConfig,
+  importPlanetConfig,
+} from "../../config";
 import { Scene } from "../../primatives/scene";
-import { Planet } from "../../scenes/solar-system/planet";
+import { Planet } from "./planet";
 
 export interface SolarSystemSceneParams {
   enableGridX: boolean;
   enableGridY: boolean;
   enableGridZ: boolean;
+  useCustomConfig: boolean;
 }
 export class SolarSystemScene extends Scene {
   gridSize = 1.0e5;
@@ -31,75 +37,23 @@ export class SolarSystemScene extends Scene {
     this.gridColour
   );
 
-  planets: Planet[] = [
-    //Sun
-    new Planet({
-      name: "Sun",
-      mass: 1.25e16,
-      radius: 796.34,
-      colour: new THREE.Color(0xfff00),
-      position: new THREE.Vector3(0, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, 0),
-      scene: this.threeScene,
-    }),
-    //Earth
-    new Planet({
-      name: "Earth",
-      mass: 1.0e15,
-      radius: 63.71,
-      colour: new THREE.Color(0x0000ff),
-      position: new THREE.Vector3(5000, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, -0.75),
-      scene: this.threeScene,
-    }),
-    //Moon
-    new Planet({
-      name: "Moon",
-      mass: 1.0e3,
-      radius: 17.37,
-      colour: new THREE.Color(0xcccccc),
-      position: new THREE.Vector3(5384, 0, -500),
-      initialVelocity: new THREE.Vector3(0, -1, -0.75),
-      scene: this.threeScene,
-    }),
-    //Mars
-    new Planet({
-      name: "Mars",
-      mass: 1.0e15,
-      radius: 63.71,
-      colour: new THREE.Color(0xcc0000),
-      position: new THREE.Vector3(-5000, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 0, 0.75),
-      scene: this.threeScene,
-    }),
-    //Deimos
-    new Planet({
-      name: "Deimos",
-      mass: 1.0e3,
-      radius: 17.37,
-      colour: new THREE.Color(0xcccccc),
-      position: new THREE.Vector3(-5384, 0, -500),
-      initialVelocity: new THREE.Vector3(0, 1, 0.75),
-      scene: this.threeScene,
-    }),
-    //Jupiter
-    // new Planet({
-    //   name: "Jupiter",
-    //   mass: 2.0e15,
-    //   radius: 342.81,
-    //   colour: new THREE.Color(0xc27ba0),
-    //   position: new THREE.Vector3(7000, 7000, -500),
-    //   initialVelocity: new THREE.Vector3(0, -0.5, 0.5),
-    //   scene: this.threeScene,
-    // }),
-  ];
+  planets: Planet[];
 
   constructor({
     enableGridX,
     enableGridY,
     enableGridZ,
+    useCustomConfig,
   }: SolarSystemSceneParams) {
     super();
+
+    if (useCustomConfig) {
+      //console.log(customPlanetConfig);
+      //console.log(defaultPlanetConfig);
+      this.planets = importPlanetConfig(customPlanetConfig, this.threeScene);
+    } else
+      this.planets = importPlanetConfig(defaultPlanetConfig, this.threeScene);
+
     // setup grid
     if (enableGridX) {
       this.gridX.rotateZ(Math.PI / 2);
