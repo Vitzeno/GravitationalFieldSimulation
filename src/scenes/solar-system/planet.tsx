@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { gravitationalConstant } from "../../config";
 import { Renderable, RenderableParams } from "../../primatives/renderable";
 import { Trail } from "../../primatives/trail";
 
@@ -18,8 +19,6 @@ export class Planet extends Renderable {
 
   initialVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
   currentVelocity: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
-
-  gravitationalConstant: number = 6.67408e-11;
 
   trail: Trail;
 
@@ -83,7 +82,7 @@ export class Planet extends Renderable {
           .normalize()
           .multiplyScalar(-1);
         let force: THREE.Vector3 = forceDir.multiplyScalar(
-          (this.gravitationalConstant * this.mass * planet.mass) /
+          (gravitationalConstant * this.mass * planet.mass) /
             Math.pow(distance, 2)
         );
 

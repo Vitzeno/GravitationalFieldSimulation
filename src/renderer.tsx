@@ -80,6 +80,7 @@ const init = (useCustomConfig: boolean) => {
     interactables: scene.planets,
   });
 
+  document.getElementById("controls")?.remove();
   document.body.appendChild(renderer.domElement);
   window.addEventListener("resize", resizeWindow, false);
 
@@ -100,7 +101,7 @@ const init = (useCustomConfig: boolean) => {
 
 export const RenderScene: FC = () => {
   return (
-    <>
+    <div id="controls">
       <Upload />
       <ButtonGroup>
         <Button onClick={(e) => init(true)}>START CUSTOM SCENE</Button>
@@ -111,6 +112,6 @@ export const RenderScene: FC = () => {
           LOG DEFAULT SCENE
         </Button>
       </ButtonGroup>
-    </>
+    </div>
   );
 };

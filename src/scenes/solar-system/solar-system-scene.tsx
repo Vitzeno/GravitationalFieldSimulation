@@ -15,7 +15,7 @@ export interface SolarSystemSceneParams {
 }
 export class SolarSystemScene extends Scene {
   gridSize = 1.0e5;
-  gridDivisions = 3.0e2;
+  gridDivisions = 5.0e1;
   gridColour = new THREE.Color(0x666666);
 
   gridX = new THREE.GridHelper(

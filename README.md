@@ -4,6 +4,8 @@ This project uses WebGL to render a simulation of various celestial bodies. Inte
 
 ![orbits](https://user-images.githubusercontent.com/23175651/147887909-60e1d1b3-1c5e-407e-8c3d-2e5ece8d4bb9.png)
 
+You can try it yourself [here](https://vitzeno.github.io/GravitationalFieldSimulation/).
+
 ## Law of Gravity
 
 Any two bodies attract each other in direct proportion to their masses and inversely to the square of the distance between them. This is illustrated in the formula below where:
@@ -17,6 +19,12 @@ Any two bodies attract each other in direct proportion to their masses and inver
 - r<sup>2</sup> is the radial distance between the centers of M<sub>1</sub> and M<sub>2</sub>
 
 Implementation details can be found [here](https://github.com/Vitzeno/WebGL/blob/master/src/scenes/solar-system/planet.tsx#L53).
+
+## Calculating Orbital Velocities
+
+Once the simulation is up and running the difficult part is figuring out the initial position and velocities of celestial bodies in order to achieve a "stable" orbit.
+
+Since we know that F<sub>C</sub> F<sub>G</sub> are equal but opposite forces we can derive a formula to calculate the orbital velocity needed to sustain an orbit around a given object. This does make the assumption that the orbiting object M<sub>2</sub> will have negligible mass in comparison to M<sub>1</sub>. Below is an illustration of how this is derived and more details can be found [here](https://www.youtube.com/watch?v=nxD7koHdQhM) and [here](https://physics.stackexchange.com/questions/306198/minimum-velocity-to-maintain-orbit-around-a-perfect-sphere).
 
 ## Custom Scenes
 
